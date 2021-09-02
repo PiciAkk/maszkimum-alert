@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "maszkimum-alert-local",
+    "slug": "maszkimum-alert-local",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "maszkimum-alert-local"
+}
