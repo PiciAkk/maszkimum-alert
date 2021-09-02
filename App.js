@@ -14,9 +14,10 @@ export default function App() {
 	    }}
 	      onChangeText={text => setTextInputValue(text)}
 	      value={ipAddress}
-		  placeholder="Enter the IP address of the server!"
+		  placeholder="Enter the IP address, and the port of the server! (default port is 5555)"
 	/>
-	<Text>{ ipAddress }</Text>
+	var returnedJSON = fetch('https://'+ipAddress)
+	<Text>{ returnedJSON }</Text>
       <StatusBar style="auto" />
     </View>
   );
