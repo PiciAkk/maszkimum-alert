@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 export default function App() {
   const [ipAddress, setTextInputValue] = React.useState('');
+  var returnedJSON = fetch('https://'+ipAddress);
   return (
     <View style={styles.container}>
 	<TextInput
@@ -16,7 +17,6 @@ export default function App() {
 	      value={ipAddress}
 		  placeholder="Enter the IP address, and the port of the server! (default port is 5555)"
 	/>
-	var returnedJSON = fetch('https://'+ipAddress)
 	<Text>{ returnedJSON }</Text>
       <StatusBar style="auto" />
     </View>
