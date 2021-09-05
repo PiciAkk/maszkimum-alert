@@ -5,6 +5,15 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      "expo-notifications",
+      {
+        "icon": "./resources/logo_256x256.png",
+        "color": "#ffffff",
+        "sounds": ["./resources/notificationsound.wav"],
+        "mode": "production"
+      }
     ]
   },
   "name": "maszkimum-alert-local"

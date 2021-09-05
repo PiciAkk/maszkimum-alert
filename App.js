@@ -1,23 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
+import * as Notifications from 'expo-notifications';
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 
 export default function App() {
   const [ipAddress, setTextInputValue] = React.useState('');
-  var returnedJSON = fetch('https://'+ipAddress);
+  var returnedJSON = "";
+  async function refreshJSON() {
+    returnedJSON = await fetch('https://'+ipAddress);
+    returnedJSON = await returnedJSON.json();
+    console.log(returnedJSON);
+  }
   return (
     <View style={styles.container}>
 	<TextInput
-	      style={{ 
-	    	height: 40, 
-	    	borderColor: 'gray', 
+	      style={{
+	    	height: 40,
+	    	borderColor: 'gray',
 	    	borderWidth: 1,
 	    }}
 	      onChangeText={text => setTextInputValue(text)}
 	      value={ipAddress}
-		  placeholder="Enter the IP address, and the port of the server! (default port is 5555)"
+		  placeholder="Enter IP address, and port!"
 	/>
-	<Text>{ returnedJSON }</Text>
+  <Button title="Fetch" onPress={() => refreshJSON()}/>
       <StatusBar style="auto" />
     </View>
   );
