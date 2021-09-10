@@ -3,14 +3,52 @@ import * as Notifications from 'expo-notifications';
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
 export default function App() {
-  const [ipAddress, setTextInputValue] = React.useState('');
-  var returnedJSON = "";
-  async function refreshJSON() {
-    returnedJSON = await fetch('https://'+ipAddress);
-    returnedJSON = await returnedJSON.json();
-    console.log(returnedJSON);
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
   }
+  const [tempIPAddress, setTextInputValue] = React.useState('');
+  let ipAddress = "";
+  let returnedJSON = "";
+  let fetchData = false;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  async function setIPAddress() {
+    ipAddress = tempIPAddress;
+    fetchData = true;
+  }
+  async function refreshJSON() {
+    while (true) {
+      if (fetchData == true) {
+        returnedJSON = await fetch('http://'+ipAddress);
+        returnedJSON = await returnedJSON.json();
+        if (returnedJSON.shortStatus == false) {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: "Mask notification",
+              body: 'No mask detected...',
+              data: { data: '' },
+            },
+            trigger: { seconds: 2 },
+          });
+        }
+      }
+      await delay(20000);
+    }
+  }
+  refreshJSON()
   return (
     <View style={styles.container}>
 	<TextInput
@@ -20,10 +58,10 @@ export default function App() {
 	    	borderWidth: 1,
 	    }}
 	      onChangeText={text => setTextInputValue(text)}
-	      value={ipAddress}
+	      value={tempIPAddress}
 		  placeholder="Enter IP address, and port!"
 	/>
-  <Button title="Fetch" onPress={() => refreshJSON()}/>
+  <Button title="Set IP Address" onPress={() => setIPAddress()}/>
       <StatusBar style="auto" />
     </View>
   );

@@ -1,20 +1,43 @@
 {
   "expo": {
-    "name": "maszkimum-alert-local",
-    "slug": "maszkimum-alert-local",
+    "name": "maszkimum-alert",
+    "slug": "maszkimum-alert",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
-    "plugins": [
-      "expo-notifications",
-      {
-        "icon": "./resources/logo_256x256.png",
-        "color": "#ffffff",
-        "sounds": ["./resources/notificationsound.wav"],
-        "mode": "production"
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
       }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+    	[
+	      "expo-notifications", 
+	      {
+	      	"icon": "./resources/logo_256x256.png",
+	        "color": "#ffffff",
+	        "sounds": ["./resources/notificationsound.wav"],
+	        "mode": "production"
+	      }
+    	]
     ]
-  },
-  "name": "maszkimum-alert-local"
+  }
 }
