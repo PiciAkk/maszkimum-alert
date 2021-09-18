@@ -64,3 +64,4 @@ A few weeks ago I noticed a 15 year old, Hungarian, non-skid programmer called [
 **2.** Start the Maszkimum web API
 **3.** Find out the IP address of the server computer
 **4.** Enter the IP address
+**5.** Wait for the notification
