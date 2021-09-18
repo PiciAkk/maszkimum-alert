@@ -62,6 +62,10 @@ A few weeks ago I noticed a 15 year old, Hungarian, non-skid programmer called [
     expo start
     ```
 **2.** Start the Maszkimum web API
+  - Install Python3 if you haven't did it already
+
 **3.** Find out the IP address of the server computer
+
 **4.** Enter the IP address
+
 **5.** Wait for the notification
