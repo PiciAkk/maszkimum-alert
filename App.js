@@ -44,6 +44,21 @@ export default function App() {
             trigger: { seconds: 2 },
           });
         }
+        else if (returnedJSON.shortStatus != true) {
+          Alert.alert(
+            "Error occured",
+            "shortStatus is an unknown value: " + returnedJSON.shortStatus,
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: false }
+          );
+        }
       }
       await delay(20000);
     }
